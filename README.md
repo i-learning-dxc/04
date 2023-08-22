@@ -1,4 +1,4 @@
-# i-Learning DXC04: 触れて学ぶコンテナ実践<br> - Docker 実践編 -
+# i-Learning DXC04:<br> 触れて学ぶコンテナ実践 - Docker 実践編 -
 
 このレポジトリは`i-Learning DXC04: 触れて学ぶコンテナ実践 - Docker 実践編 -`で使用するコードを収録したレポジトリです。
 
