@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+  gitLab:
+    hostname: gitlab.192.168.200.50.nip.io
+    image: gitlab/gitlab-ee:latest
+    ports:
+      - "9922:22"
+      - "80:80"
+      - "443:443"
+      - "5050:5050"
+    volumes:
+      - '/home/ubuntu/gitlab/config:/etc/gitlab'
+      - '/home/ubuntu/gitlab/logs:/var/log/gitlab'
+      - '/home/ubuntu/gitlab/data:/var/opt/gitlab'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    restart: always
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['time_zone'] = 'Tokyo'
+        #[OPTION]gitlab container registryを有効化することで、コンテナをローカルに保有できる
+        external_url 'https://gitlab.192.168.200.50.nip.io'
+        registry_external_url 'https://gitlab.192.168.200.50.nip.io:5050'
+        gitlab_rails['registry_enabled'] = true
+        #[OPTION]SSL証明書期限切れ通知メールを受け取る場合
+        #letsencrypt['contact_emails'] = ['dxc04@i-learning.pro']
+        letsencrypt['enable'] = true
+
+        #[OPTION]リソース軽減するために不要な機能を停止
+        gitlab_rails['gitlab_kas_enabled'] = false
+        grafana['enable'] = false
+        prometheus_monitoring['enable'] = false
+        prometheus['enable'] = false
+        alertmanager['enable'] = false
