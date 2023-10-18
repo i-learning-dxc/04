@@ -44,7 +44,7 @@ gitlab/gitlab-ee:latest
 ```
 $ docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
 $ docker rm -f gitlab
-$ docker ps
+$ docker-compose ps
 ```
 
 # 2.2.4.
@@ -95,7 +95,7 @@ $ chmod 600 ~/.ssh/config
 
 ```
 $ cd 
-$ git clone git@gitlab.{your Instance IP}.nip.io:root/dxc04.git
+$ git clone git@gitlab.{your Instance IP}.dxc04.work:root/dxc04.git
 ```
 
 # 2.3.4.1.
@@ -119,7 +119,7 @@ $ sudo -u gitlab-runner -H docker info
 
 ```
 $ sudo gitlab-runner register -n \
-  --url http://gitlab.{your Instance IP}.nip.io \
+  --url http://gitlab.{your Instance IP}.dxc04.work \
   --token {REGISTRATION_TOKEN} \
   --executor shell  --executor docker \
   --docker-image "docker:latest"
