@@ -184,7 +184,7 @@ $ sudo sh docker-bench-security.sh
 
 ```
 $ sudo sh docker-bench-security.sh -c check_1_1_3 -p
-$ sudo apt –y install auditd
+$ sudo apt -y install auditd
 $ sudo sh -c "echo '-w /usr/bin/dockerd -k docker' >> /etc/audit/rules.d/audit.rules" 
 $ sudo systemctl restart auditd
 $ sudo sh docker-bench-security.sh -c check_1_1_3 -p
@@ -226,13 +226,30 @@ $ docker stop dxc04-3.2.3
 $ docker rm dxc04-3.2.3
 $ docker build . -t dxc04-3.2.3
 $ docker run --name dxc04-3.2.3 -d -p 8081:80 dxc04-3.2.3:latest
+$ cd ~/docker-bench-security/
+$ sudo sh docker-bench-security.sh -c check_4_1 -p
+```
+
+```
+$ echo DOCKER_CONTENT_TRUST=1 | sudo tee -a /etc/environment 
+$ sudo sh docker-bench-security.sh -c check_4_5 -p
+```
+
+# 4.1.3
+
+```
+$ cd ~/i-learning-DXC04/DXC04/4.1.3
+$ docker build . -t dxc04-4.1.3
+$ docker run --name dxc04-4.1.3 -d -p 8081:80 dxc04-4.1.3:latest
+$ docker stop dxc04-4.1.3
+$ docker rm dxc04-4.1.3
 ```
 
 # 5.1.4.1
 
 ```
 $ cd ~/i-learning-DXC04/DXC04/5.1.4/drupal
-$ docker run --rm drupal:9.5.0-php8.1-apache-bullseye bash -c "composer require drush/drush && \
+$ docker run --rm drupal:10.2.3-php8.3-apache-bullseye bash -c "composer require drush/drush && \
 tar -cC /opt/drupal --exclude ./vendor --exclude ./web/core --exclude ./web/profiles ." \
 | tar -xC ./
 ```
@@ -250,7 +267,7 @@ $ docker stop mariadb
 
 ```
 $ cd ~/i-learning-DXC04/DXC04/5.1.4/drupal
-$ docker run --rm drupal:9.5.0-php8.1-apache-bullseye bash -c "composer require drush/drush && \
+$ docker run --rm drupal:10.2.3-php8.3-apache-bullseye bash -c "set COMPOSER_ALLOW_SUPERUSER=1; composer require drush/drush && \
 tar -cC /opt/drupal --exclude ./vendor --exclude ./web/core --exclude ./web/profiles ." \
 | tar -xC ./
 $ chmod 755 docker-entrypoint.sh

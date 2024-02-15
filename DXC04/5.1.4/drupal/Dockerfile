@@ -1,6 +1,7 @@
-FROM drupal:9.5.0-php8.1-apache-bullseye
+FROM drupal:10.2.3-php8.3-apache-bullseye
 
 # Drushインストール
+ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN composer require drush/drush && drush --version
 
 #  初回起動時にDrupalをインストールする⽤のshellを配置
