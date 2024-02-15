@@ -15,7 +15,7 @@
 |:--|:--|
 |OS|Ubuntu 22.04LTS|
 |Instance| AWS EC2 t2.xlarge|
-|CPU|xCPU|
+|CPU|4vCPU|
 |MEM|16GB|
 |HDD|16GB|
 
