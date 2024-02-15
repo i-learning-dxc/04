@@ -1,7 +1,23 @@
+
+## 環境差異について
+本レポジトリはDXC04の受講を手助けするためのコマンド一覧となります。
+
+授業進行の中で、"dxc04.work"というDNSサービスを使用していますが、講義期間外は利用ができません。
+コマンド及びファイル中の"dxc04.work"は"nip.io"という公開DNSサービスに置き換えてご使用ください。
+
 ## 準備
 
 演習環境では実施済みのため不要の手順です。
 ご自身の環境で演習する場合は参考にしてください。
+
+演習環境
+|||
+|:--|:--|
+|OS|Ubuntu 22.04LTS|
+|Instance| AWS EC2 t2.xlarge|
+|CPU|xCPU|
+|MEM|16GB|
+|HDD|16GB|
 
 ### Docker Install
 
@@ -28,7 +44,7 @@ $ git clone https://github.com/i-learning-dxc/04.git i-learning-DXC04
 
 ```
 $ sudo docker run --detach \
---hostname gitlab.{your Instance IP}.nip.io \
+--hostname gitlab.{your Instance IP}.dxc04.work \
 --publish 443:443 --publish 80:80 \
 --name gitlab \
 --restart always \
@@ -44,7 +60,7 @@ gitlab/gitlab-ee:latest
 ```
 $ docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
 $ docker rm -f gitlab
-$ docker-compose ps
+$ docker ps
 ```
 
 # 2.2.4.
@@ -53,7 +69,7 @@ $ docker-compose ps
 $ cd i-learning-DXC04/DXC04/2.2.3/gitlab-compose
 $ vi docker-compose.yml
 $ docker-compose up -d
-$ docker ps
+$ docker-compose ps
 ```
 
 # 2.2.4.1.
@@ -81,10 +97,11 @@ $ vi ~/.ssh/config
 ```
 
 ```
-Host gitlab.{your Instance IP}.nip.io
+Host gitlab.{your Instance IP}.dxc04.work
     PreferredAuthentications publickey
     IdentityFile ~/.ssh/id_rsa
-    Port 9922 User git
+    Port 9922
+    User git
 ```
 
 ```
@@ -119,7 +136,7 @@ $ sudo -u gitlab-runner -H docker info
 
 ```
 $ sudo gitlab-runner register -n \
-  --url http://gitlab.{your Instance IP}.dxc04.work \
+  --url https://gitlab.{your Instance IP}.dxc04.work \
   --token {REGISTRATION_TOKEN} \
   --executor shell  --executor docker \
   --docker-image "docker:latest"
@@ -129,7 +146,7 @@ $ sudo gitlab-runner register -n \
 
 ```
 $ sudo vi /etc/gitlab-runner/config.toml
-$ sudo useradd docker –g docker
+$ sudo useradd docker -g docker
 $ sudo gitlab-runner restart
 ```
 
