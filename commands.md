@@ -17,7 +17,7 @@
 |Instance| AWS EC2 t2.xlarge|
 |CPU|4vCPU|
 |MEM|16GB|
-|HDD|25GB|
+|HDD|30GB|
 
 ### Docker Install
 
