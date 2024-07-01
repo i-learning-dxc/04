@@ -27,7 +27,6 @@ services:
 
         #[OPTION]リソース軽減するために不要な機能を停止
         gitlab_rails['gitlab_kas_enabled'] = false
-        grafana['enable'] = false
         prometheus_monitoring['enable'] = false
         prometheus['enable'] = false
         alertmanager['enable'] = false
