@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   gitLab:
-    hostname: gitlab.192.168.200.50.dxc04.work
+    hostname: gitlab.192.168.200.50.dxc04.jp
     image: gitlab/gitlab-ee:latest
     ports:
       - "9922:22"
@@ -18,8 +18,8 @@ services:
       GITLAB_OMNIBUS_CONFIG: |
         gitlab_rails['time_zone'] = 'Tokyo'
         #[OPTION]gitlab container registryを有効化することで、コンテナをローカルに保有できる
-        external_url 'https://gitlab.192.168.200.50.dxc04.work'
-        registry_external_url 'https://gitlab.192.168.200.50.dxc04.work:5050'
+        external_url 'https://gitlab.192.168.200.50.dxc04.jp'
+        registry_external_url 'https://gitlab.192.168.200.50.dxc04.jp:5050'
         gitlab_rails['registry_enabled'] = true
         #[OPTION]SSL証明書期限切れ通知メールを受け取る場合
         #letsencrypt['contact_emails'] = ['dxc04@i-learning.pro']

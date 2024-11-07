@@ -2,8 +2,8 @@
 ## 環境差異について
 本レポジトリはDXC04の受講を手助けするためのコマンド一覧となります。
 
-授業進行の中で、"dxc04.work"というDNSサービスを使用していますが、講義期間外は利用ができません。
-コマンド及びファイル中の"dxc04.work"は"nip.io"という公開DNSサービスに置き換えてご使用ください。
+授業進行の中で、"dxc04.jp"というDNSサービスを使用していますが、講義期間外は利用ができません。
+コマンド及びファイル中の"dxc04.jp"は"nip.io"という公開DNSサービスに置き換えてご使用ください。
 
 ## 準備
 
@@ -44,7 +44,7 @@ $ git clone https://github.com/i-learning-dxc/04.git i-learning-DXC04
 
 ```
 $ sudo docker run --detach \
---hostname gitlab.{your Instance IP}.dxc04.work \
+--hostname gitlab.{your Instance IP}.dxc04.jp \
 --publish 443:443 --publish 80:80 \
 --name gitlab \
 --restart always \
@@ -97,7 +97,7 @@ $ vi ~/.ssh/config
 ```
 
 ```
-Host gitlab.{your Instance IP}.dxc04.work
+Host gitlab.{your Instance IP}.dxc04.jp
     PreferredAuthentications publickey
     IdentityFile ~/.ssh/id_rsa
     Port 9922
@@ -112,7 +112,7 @@ $ chmod 600 ~/.ssh/config
 
 ```
 $ cd 
-$ git clone git@gitlab.{your Instance IP}.dxc04.work:root/dxc04.git
+$ git clone git@gitlab.{your Instance IP}.dxc04.jp:root/dxc04.git
 ```
 
 # 2.3.4.1.
@@ -136,7 +136,7 @@ $ sudo -u gitlab-runner -H docker info
 
 ```
 $ sudo gitlab-runner register -n \
-  --url https://gitlab.{your Instance IP}.dxc04.work \
+  --url https://gitlab.{your Instance IP}.dxc04.jp \
   --token {REGISTRATION_TOKEN} \
   --executor shell  --executor docker \
   --docker-image "docker:latest"
