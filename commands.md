@@ -17,7 +17,7 @@
 |Instance| AWS EC2 t2.xlarge|
 |CPU|4vCPU|
 |MEM|16GB|
-|HDD|30GB|
+|HDD|50GB|
 
 ### Docker Install
 
@@ -274,3 +274,4 @@ $ chmod 755 docker-entrypoint.sh
 $ docker-compose build
 $ docker-compose up -d
 ```
+
