@@ -1,0 +1,41 @@
+stages:
+  - build
+  - test
+
+# 公式テンプレートを読み込む（Code Quality / Container Scanning / Secret Detection / SAST）
+include:
+#  - template: Jobs/Code-Quality.gitlab-ci.yml
+  - template: Security/Container-Scanning.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+  - template: Security/SAST.gitlab-ci.yml
+
+variables:
+  # docker:27 イメージでホストの Docker ソケットを使う前提
+  DOCKER_TLS_CERTDIR: ""
+  IMAGE_TAG: "$CI_COMMIT_SHORT_SHA"
+  # Container Scanning 用にスキャン対象のイメージを指定
+  CS_IMAGE: "$CI_REGISTRY_IMAGE:$IMAGE_TAG"
+
+# 1) コンテナのビルド & レジストリに push
+build-image:
+  stage: build
+  image: docker:27
+  script:
+    - docker version            # バージョン確認（デバッグ用）
+    - echo "$CI_REGISTRY_PASSWORD" | docker login "$CI_REGISTRY" -u "$CI_REGISTRY_USER" --password-stdin
+    - docker build -t "$CI_REGISTRY_IMAGE:$IMAGE_TAG" .
+    - docker push "$CI_REGISTRY_IMAGE:$IMAGE_TAG"
+
+# 2) プロジェクト固有のテスト
+unit_tests:
+  stage: test
+  image: alpine:3.20
+  script:
+    # ここをプロジェクトに合わせて書き換え
+    - echo "ここにユニットテストのコマンドを書く"
+
+# ここから下は include されたテンプレートが自動でジョブを作ってくれる：
+# - code_quality（Code-Quality）
+# - container_scanning（Container Scanning）
+# - secret_detection（Secret Detection）
+# - sast / semgrep-sast（SAST / Semgrep）
