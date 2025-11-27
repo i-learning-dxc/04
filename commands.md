@@ -157,6 +157,7 @@ $ git config --global user.email "メールアドレス"
 $ git config --global user.name "⽒名"
 $ cd ~/dxc04
 $ cp ~/i-learning-DXC04/DXC04/2.3.7/.[!.]* ./
+$ cp ~/i-learning-DXC04/DXC04/2.3.7/* ./
 $ git add . 
 $ git status
 $ git commit -m "wip"
@@ -274,5 +275,6 @@ $ chmod 755 docker-entrypoint.sh
 $ docker-compose build
 $ docker-compose up -d
 ```
+
 
 
