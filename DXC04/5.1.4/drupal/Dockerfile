@@ -2,7 +2,7 @@ FROM drupal:10.2.3-php8.3-apache-bullseye
 
 # Drushインストール
 ENV COMPOSER_ALLOW_SUPERUSER 1
-RUN composer require drush/drush drupal/mysql && drush --version
+RUN composer require drush/drush:^12 && drush --version
 
 # 初回起動時にDrupalをインストールする用のshellを配置
 COPY docker-entrypoint.sh /tmp
