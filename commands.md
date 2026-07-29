@@ -14,10 +14,10 @@
 |||
 |:--|:--|
 |OS|Ubuntu 22.04LTS|
-|Instance| AWS EC2 t2.xlarge|
-|CPU|4vCPU|
-|MEM|16GB|
-|HDD|50GB|
+|Instance| AWS EC2 m5.large以上|
+|CPU|2vCPU以上|
+|MEM|8GB以上|
+|HDD|80GB以上|
 
 ### Docker Install
 
@@ -43,7 +43,7 @@ $ git clone https://github.com/i-learning-dxc/04.git i-learning-DXC04
 # 2.2.1.
 
 ```
-$ sudo docker run --detach \
+$ sudo docker container run --detach \
 --hostname gitlab.{your Instance IP}.dxc04.work \
 --publish 443:443 --publish 80:80 \
 --name gitlab \
@@ -58,9 +58,9 @@ gitlab/gitlab-ee:latest
 # 2.2.2.
 
 ```
-$ docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
-$ docker rm -f gitlab
-$ docker ps
+$ docker container exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
+$ docker container rm -f gitlab
+$ docker container ls
 ```
 
 # 2.2.4.
@@ -75,7 +75,7 @@ $ docker-compose ps
 # 2.2.4.1.
 
 ```
-$ docker exec -it gitlab-compose_gitLab_1 grep 'Password:' /etc/gitlab/initial_root_password
+$ docker container exec -it gitlab-compose_gitLab_1 grep 'Password:' /etc/gitlab/initial_root_password
 ```
 
 # 2.3.2.4.
@@ -168,8 +168,8 @@ $ git push -u origin main
 
 ```
 $ cd ~/i-learning-DXC04/DXC04/3.2.3/
-$ docker build . -t dxc04-3.2.3
-$ docker run --name dxc04-3.2.3 -d -p 8081:80 dxc04-3.2.3:latest
+$ docker image build . -t dxc04-3.2.3
+$ docker container run --name dxc04-3.2.3 -d -p 8081:80 dxc04-3.2.3:latest
 ```
 
 # 3.3.1
@@ -223,10 +223,10 @@ $ sudo sh docker-bench-security.sh -c check_1_1_6 -p
 
 ```
 $ cd ~/i-learning-DXC04/DXC04/3.2.3/
-$ docker stop dxc04-3.2.3
-$ docker rm dxc04-3.2.3
-$ docker build . -t dxc04-3.2.3
-$ docker run --name dxc04-3.2.3 -d -p 8081:80 dxc04-3.2.3:latest
+$ docker container stop dxc04-3.2.3
+$ docker container rm dxc04-3.2.3
+$ docker image build . -t dxc04-3.2.3
+$ docker container run --name dxc04-3.2.3 -d -p 8081:80 dxc04-3.2.3:latest
 $ cd ~/docker-bench-security/
 $ sudo sh docker-bench-security.sh -c check_4_1 -p
 ```
@@ -240,17 +240,17 @@ $ sudo sh docker-bench-security.sh -c check_4_5 -p
 
 ```
 $ cd ~/i-learning-DXC04/DXC04/4.1.3
-$ docker build . -t dxc04-4.1.3
-$ docker run --name dxc04-4.1.3 -d -p 8081:80 dxc04-4.1.3:latest
-$ docker stop dxc04-4.1.3
-$ docker rm dxc04-4.1.3
+$ docker image build . -t dxc04-4.1.3
+$ docker container run --name dxc04-4.1.3 -d -p 8081:80 dxc04-4.1.3:latest
+$ docker container stop dxc04-4.1.3
+$ docker container rm dxc04-4.1.3
 ```
 
 # 5.1.4.1
 
 ```
 $ cd ~/i-learning-DXC04/DXC04/5.1.4/drupal
-$ docker run --rm drupal:10.2.3-php8.3-apache-bullseye bash -c "composer require drush/drush && \
+$ docker container run --rm drupal:10.2.3-php8.3-apache-bullseye bash -c "composer require drush/drush && \
 tar -cC /opt/drupal --exclude ./vendor --exclude ./web/core --exclude ./web/profiles ." \
 | tar -xC ./
 ```
@@ -260,15 +260,15 @@ tar -cC /opt/drupal --exclude ./vendor --exclude ./web/core --exclude ./web/prof
 
 ```
 $ docker container run --name mariadb -e MARIADB_ROOT_PASSWORD=password -d mariadb
-$ docker ps
-$ docker stop mariadb
+$ docker container ls
+$ docker container stop mariadb
 ```
 
 # 5.1.9.
 
 ```
 $ cd ~/i-learning-DXC04/DXC04/5.1.4/drupal
-$ docker run --rm drupal:10.2.3-php8.3-apache-bullseye bash -c "set COMPOSER_ALLOW_SUPERUSER=1; composer require drush/drush && \
+$ docker container run --rm drupal:10.2.3-php8.3-apache-bullseye bash -c "set COMPOSER_ALLOW_SUPERUSER=1; composer require drush/drush && \
 tar -cC /opt/drupal --exclude ./vendor --exclude ./web/core --exclude ./web/profiles ." \
 | tar -xC ./
 $ chmod 755 docker-entrypoint.sh
