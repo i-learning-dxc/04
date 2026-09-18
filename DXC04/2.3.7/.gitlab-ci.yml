@@ -15,6 +15,7 @@ variables:
   IMAGE_TAG: "$CI_COMMIT_SHORT_SHA"
   # Container Scanning 用にスキャン対象のイメージを指定
   CS_IMAGE: "$CI_REGISTRY_IMAGE:$IMAGE_TAG"
+  # BuildKit を無効化する
   DOCKER_BUILDKIT: "0"
 
 # 1) コンテナのビルド & レジストリに push
